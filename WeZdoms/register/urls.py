@@ -8,4 +8,5 @@ urlpatterns = [
     path('authorization/', views.LoginUser.as_view(), name = "authorization"),
     path('test/', views.test, name = "test"),
     path('mudrosty/', views.MudrastyView.as_view(), name = "mudrosty"),
+    path('mudrosty_add/', views.addmudrosty, name = "mudrosty_add"),
 ]

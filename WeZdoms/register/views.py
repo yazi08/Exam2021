@@ -53,3 +53,25 @@ class MudrastyView(ListView):
         context = super().get_context_data(**kwargs)
         context['menu']=menu
         return context
+
+def addmudrosty(request):
+    if request.method == 'POST':
+        form = AddMudrostyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "base.html")
+    else:
+        form = AddMudrostyForm()
+
+    return render(request, "register/Добавить_мудрость.html", {'form':form,'menu':menu} )
+
+
+# class AddMudrosty(LoginRequiredMixin, DataMixin, CreateView):
+#     model = AddMudrostyForm
+#     template_name = "register/Добавить_мудрость.html"
+#     context_object_name = 'mudrosty_add'
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['menu']=menu
+#         return context
+
