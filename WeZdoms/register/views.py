@@ -1,22 +1,55 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView
 
 from .forms import *
+from WeZdoms.views import *
 
-def check_in(request):
-    # if this is a POST request we need to process the form data
+from .models import Mudrosty
+
+
+def register (request):
+
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = RegisterForm(request.POST)
-        # check whether it's valid:
+        form = RegisterUserForm(request.POST)
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
-
-    # if a GET (or any other method) we'll create a blank form
+            form.save()
+            return render(request, "register/успешная регистрация.html")
     else:
-        form = RegisterForm()
+        form = RegisterUserForm()
 
-    return render(request, 'register/регистрация.html', {'form': form})
+
+
+    return render(request, "register/регистрация.html", {'form': form,'menu': menu})
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'register/авторизация.html'
+    context_objects_name = 'form'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu']=menu
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('base')
+
+
+def test(request):
+    if not request.user.is_authenticated:
+        return render(request, 'register/авторизация.html')
+    return render(request, "base.html",{'menu': menu})
+
+
+class MudrastyView(ListView):
+    model = Mudrosty
+    template_name = "register/мудрости.html"
+    context_object_name = 'mudrosty'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu']=menu
+        return context

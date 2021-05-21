@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+    {% for m in mudrosty %}
+
+    <ul id="tab">
+        <li><h3>{{m.description_blog}}</h3></li>
+        <li><p>{{m.data_blog}}</p></li>
+        <li>{{m.name_blogers}}</li>
+    </ul>
+    <hr>
+    {% endfor %}
+
+{% endblock body %}

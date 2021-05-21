@@ -11,14 +11,19 @@
 </head>
 <body>
     <nav>
+        <img src="{% static 'img/блог_1.png'  %}" alt="">
         {% for m in menu %}
         <ul>
             <li><a href="{% url m.url_name %}">{{m.title}}</a></li>
         </ul>
         {% endfor %}
         <ul>
+            <li><a href="{% url 'mudrosty' %}">Test</a></li>
+            <li><a href="{% url 'test' %}">Test</a></li>
             <li><a href="{% url 'check_in' %}">Регистрация</a></li>
+            <li><a href="{% url 'authorization' %}">Авторизация</a></li>
         </ul>
+
 
     </nav>
 

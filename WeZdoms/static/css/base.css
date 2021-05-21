@@ -1,4 +1,41 @@
 body {
-    background:red;
+    background: #2c2c2c;
+}
 
+
+
+
+
+
+
+#tab {
+    color:#fff;
+    padding-left: 30%;
+    padding-top: 10%;
+    list-style: none;
+}
+
+
+nav {
+    float: left;
+    background:#181818; /* задний фон */
+    width 20%;
+    padding: 2.5%;
+    height: 100vh;
+    color:#fff;
+    border-right: 5px solid #4d4d4d;
+    position: fixed
+
+}
+
+nav ul {list-style: none}
+nav ul li {
+    margin-top: 10%;
+    margin-right:30px;
+
+nav img {
+    width:80px;
+    float: left;
+    margin-bottom: 20px;
+    margin-left:30px;
 }
