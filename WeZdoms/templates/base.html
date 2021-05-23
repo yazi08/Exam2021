@@ -18,20 +18,23 @@
         </ul>
         {% endfor %}
         <ul>
+
             <li><a href="{% url 'mudrosty_add' %}">Добавить мудрость</a></li>
             <li><a href="{% url 'mudrosty' %}">Мудрости</a></li>
-        {% for o in obj %}
 
-            <li>{{o}}</li>
-        {% endfor %}
 
         </ul>
 
     </nav>
     <aside>
         <ul id="menu">
+            {% if request.user.is_authenticated %}
+            <li><a>{{user.username}}</a></li>
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+            {% else %}
             <li><a href="{% url 'check_in' %}">Регистрация</a></li>
             <li><a href="{% url 'authorization' %}">Авторизация</a></li>
+            {% endif %}
         </ul>
     </aside>
 

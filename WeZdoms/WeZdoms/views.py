@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
-
+from django.views.generic import ListView
 
 menu = [
     {'title':'Главная','url_name':'glavnaya'},
@@ -13,13 +13,14 @@ menu = [
 ]
 
 
+
 def base(request):
     obj = User.objects.all()
     return render(request, 'base.html', {'menu': menu,'obj':obj})
 
 def glavnaya(request):
 
-    return render(request, 'WeZdoms/base.html', {'menu': menu})
+    return render(request, 'base.html', {'menu': menu})
 
 
 
