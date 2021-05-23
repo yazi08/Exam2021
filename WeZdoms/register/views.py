@@ -1,4 +1,4 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,18 +13,29 @@ from WeZdoms.views import *
 
 from .models import Mudrosty
 
+# class Register(CreateView):
+#     form_class = AuthenticationForm
+#     template_name = 'register/регистрация.html'
+#     context_objects_name = 'form'
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['form'] = form
+#         return context
+
 
 def register (request):
+
 
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "register/успешная регистрация.html")
+
+
+
+            return redirect('login')
     else:
         form = RegisterUserForm()
-
-
 
     return render(request, "register/регистрация.html", {'form': form,'menu': menu})
 
@@ -41,13 +52,9 @@ class LoginUser(LoginView):
         return reverse_lazy('base')
 
 
-def test(request):
-    if not request.user.is_authenticated:
-        return render(request, 'register/авторизация.html')
-    return render(request, "base.html",{'menu': menu})
-
 
 class MudrastyView(ListView,LoginRequiredMixin):
+    paginate_by = 2
     model = Mudrosty
     template_name = "register/мудрости.html"
     context_object_name = 'mudrosty'
@@ -61,7 +68,7 @@ def addmudrosty(request):
         form = AddMudrostyForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "base.html")
+            return redirect('mudrosty')
     else:
         form = AddMudrostyForm()
 

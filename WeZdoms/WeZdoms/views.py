@@ -20,7 +20,7 @@ def base(request):
 
 def glavnaya(request):
 
-    return render(request, 'base.html', {'menu': menu})
+    return render(request, 'WeZdoms/WeZdoms.html', {'menu': menu})
 
 
 
@@ -32,5 +32,6 @@ def entrance(request):
 
 
 def login(request):
-    return render(request, "register/успешная регистрация.html")
+    obj = User.objects.all()
+    return render(request, "register/успешная регистрация.html",{'menu': menu,'obj':obj})
 

@@ -18,10 +18,11 @@
         </ul>
         {% endfor %}
         <ul>
-
-            <li><a href="{% url 'mudrosty_add' %}">Добавить мудрость</a></li>
             <li><a href="{% url 'mudrosty' %}">Мудрости</a></li>
+            {% if request.user.is_authenticated and request.user.is_staff %}
+            <li><a href="{% url 'mudrosty_add' %}">Добавить мудрость</a></li>
 
+            {% endif %}
 
         </ul>
 
@@ -38,9 +39,27 @@
         </ul>
     </aside>
 
-
-
     {% block body %}
     {% endblock body %}
+
+    <div>
+        <ul>
+            {% for p in paginator.page_range %}
+            {% if page_obj.number == p %}
+            <li >{{p}}</li>
+            {% else %}
+            <li>
+                <a href="?page={{ p }}">{{ p }}</a>
+
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+    </div>
+
+
+
+
 </body>
 </html>

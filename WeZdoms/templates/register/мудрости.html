@@ -2,14 +2,15 @@
 
 
 {% block body %}
+    <h1>Мудрости</h1>
     {% for m in mudrosty %}
 
     <ul id="tab">
         <li><h3>{{m.description_blog}}</h3></li>
-        <li><p>{{m.data_blog}}</p></li>
+        <li>{{m.data_blog}}</li>
         <li>{{m.name_blogers}}</li>
     </ul>
-    <hr>
+
     {% endfor %}
 
 {% endblock body %}
