@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
@@ -45,7 +46,7 @@ def test(request):
     return render(request, "base.html",{'menu': menu})
 
 
-class MudrastyView(ListView):
+class MudrastyView(ListView,LoginRequiredMixin):
     model = Mudrosty
     template_name = "register/мудрости.html"
     context_object_name = 'mudrosty'

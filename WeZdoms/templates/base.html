@@ -20,13 +20,22 @@
         <ul>
             <li><a href="{% url 'mudrosty_add' %}">Добавить мудрость</a></li>
             <li><a href="{% url 'mudrosty' %}">Мудрости</a></li>
-            <li><a href="{% url 'test' %}">Test</a></li>
+        {% for o in obj %}
+
+            <li>{{o}}</li>
+        {% endfor %}
+
+        </ul>
+
+    </nav>
+    <aside>
+        <ul id="menu">
             <li><a href="{% url 'check_in' %}">Регистрация</a></li>
             <li><a href="{% url 'authorization' %}">Авторизация</a></li>
         </ul>
+    </aside>
 
 
-    </nav>
 
     {% block body %}
     {% endblock body %}
