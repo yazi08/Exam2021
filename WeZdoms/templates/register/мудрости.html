@@ -1,16 +1,33 @@
 {% extends "base.html" %}
-
+    {% block title %}
+    <title>Мудрости</title>
+    {% endblock title %}
 
 {% block body %}
     <h1>Мудрости</h1>
+
     {% for m in mudrosty %}
 
     <ul id="tab">
-        <li><h3>{{m.description_blog}}</h3></li>
-        <li>{{m.data_blog}}</li>
-        <li>{{m.name_blogers}}</li>
-    </ul>
+        {% if request.user.is_authenticated %}
+            <li><h3>{{m.description_blog}}</h3></li>
+            <li>{{m.data_blog}}</li>
+            <li>{{m.name_blogers}}</li>
+            <a href="{% url 'delete' m.id %}">Удалить</a>
+        {% else %}
+            <a href="{% url 'delete' m.id %}">Удалить</a>
+        {% endif %}
+     </ul>
+
+
+
+
+
+
+
+
 
     {% endfor %}
+
 
 {% endblock body %}

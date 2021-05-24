@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 
 from .forms import *
 from WeZdoms.views import *
@@ -53,7 +53,7 @@ class LoginUser(LoginView):
 
 
 
-class MudrastyView(ListView,LoginRequiredMixin):
+class MudrastyView(LoginRequiredMixin,ListView):
     paginate_by = 2
     model = Mudrosty
     template_name = "register/мудрости.html"
@@ -87,3 +87,15 @@ def addmudrosty(request):
 def logout_user(request):
     logout(request)
     return redirect('authorization')
+
+class MudrastyDelete(LoginRequiredMixin,DeleteView):
+    model = Mudrosty
+    success_url = '/register/mudrosty/'
+    template_name = "register/удалить_мудрость.html"
+    raise_exception = True
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        return context
+

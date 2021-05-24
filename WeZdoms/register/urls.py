@@ -9,4 +9,5 @@ urlpatterns = [
     path('authorization/', views.LoginUser.as_view(), name = "authorization"),
     path('mudrosty/', views.MudrastyView.as_view(), name = "mudrosty"),
     path('mudrosty_add/', views.addmudrosty, name = "mudrosty_add"),
+    path('<int:pk>/delete', views.MudrastyDelete.as_view(), name = "delete"),
 ]
